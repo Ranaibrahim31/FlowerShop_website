@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <!-- favicon-->
+    <link rel="shortcut icon" href="https://i.postimg.cc/T1HtPsFn/favicon-96x96.png" type="image/x-icon">
+
+    <title>Sign-Up</title>
+    <style>
+        body {
+       font-family: 'Poppins', 'Segoe UI', sans-serif;
+       background: linear-gradient(to right, #ffe4ec, #f9a8d4, #db2777);
+       margin: 0;
+       padding: 0;
+       color: #333;
+   }
+
+
+   .container {
+       text-align: center;
+       margin-top: 120px;
+       color:#f9a8d4;
+   }
+
+   .container h1 {
+       font-size: 38px;
+       font-weight: 600;
+       letter-spacing: 1px;
+   }
+
+   .container p {
+       font-size: 18px;
+       margin-bottom: 20px;
+   }
+
+
+   button {
+       padding: 12px 25px;
+       background: #db2777;
+       color: white;
+       border: none;
+       border-radius: 25px;
+       font-size: 16px;
+       cursor: pointer;
+       transition: 0.3s;
+   }
+
+   button:hover {
+       background: #0f172a;
+       transform: scale(1.03);
+   }
+
+
+   .form-container {
+       width: 360px;
+       margin: 60px auto;
+       background: white;
+       padding: 30px;
+       border-radius: 25px;
+       box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+   }
+
+
+   .form-container h2 {
+       margin-bottom: 10px;
+   }
+
+
+   .form-container p {
+       font-size: 14px;
+       color: #666;
+       margin-bottom: 15px;
+   }
+
+
+   input, select {
+       width: 95%;
+       padding: 12px;
+       margin: 10px 0;
+       border-radius: 20px;
+       border: 1px solid #ccc;
+       outline: none;
+       font-size: 14px;
+       transition: 0.3s;
+   }
+
+
+   input:focus, select:focus {
+       border-color: #1e3a8a;
+       box-shadow: 0 0 8px rgba(30, 58, 138, 0.3);
+   }
+
+
+   .gender {
+       display: flex;
+       justify-content: space-around;
+       margin: 10px 0;
+   }
+
+
+   label {
+       font-size: 15px;
+   }
+
+
+   #message {
+       margin-top: 10px;
+       font-size: 14px;
+
+       .error {
+           color: red;
+           font-size: 12px;
+           display: block;
+           text-align: left;
+           margin-left: 5px;
+       }
+
+       #formMessage {
+           margin-top: 10px;
+           font-weight: bold;
+           text-align: center;
+       }
+   }
+
+    </style>
+</head>
+<body>
+
+<div class="form-container">
+    <h2>Course Registration Form</h2>
+    <p>Please fill in your details to enroll in a course</p>
+
+
+    <div id="formMessage"></div>
+
+    <form id="registerForm">
+
+        <!-- Name -->
+        <input type="text" id="name" placeholder="Full Name">
+        <small class="error" id="nameError"></small>
+
+        <!-- Email -->
+        <input type="email" id="email" placeholder="Email">
+        <small class="error" id="emailError"></small>
+
+        <!-- Password -->
+        <input type="password" id="password" placeholder="Password">
+        <small class="error" id="passwordError"></small>
+
+        <!-- Confirm Password -->
+        <input type="password" id="confirmPassword" placeholder="Confirm Password">
+        <small class="error" id="confirmPasswordError"></small>
+
+        <!-- Gender -->
+        <div class="gender">
+            <label>
+                <input type="radio" name="gender" value="male"> Male
+            </label>
+            <label>
+                <input type="radio" name="gender" value="female"> Female
+            </label>
+        </div>
+
+        <!-- Terms -->
+        <div class="terms">
+            <input type="checkbox" id="terms">
+            <label for="terms">agreed to all terms and conditions</label>
+        </div>
+
+        <button class="signup"  type="submit">Sign-up</button>
+
+    </form>
+</div>
+
+<script>
+    document.getElementById("registerForm").addEventListener("submit", function(e) {
+
+        e.preventDefault();
+
+        let inputs = ["name", "email", "password", "confirmPassword"];
+        let errorMsg = "";
+
+        // check empty fields
+        for (let i = 0; i < inputs.length; i++) {
+            let value = document.getElementById(inputs[i]).value;
+            if (value === "") {
+                errorMsg = inputs[i] + " is required";
+                break;
+            }
+        }
+
+        // email validation
+        let email = document.getElementById("email").value;
+        let emailPattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
+
+        if (errorMsg === "" && !email.match(emailPattern)) {
+            errorMsg = "Invalid email format";
+        }
+
+        // password validation
+        let password = document.getElementById("password").value;
+        let confirmPassword = document.getElementById("confirmPassword").value;
+
+        let passwordPattern = /^(?=.*[A-Z])(?=.*[\W_]).{6,}$/;
+
+        if (errorMsg === "" && !password.match(passwordPattern)) {
+            errorMsg = "Password must be at least 6 characters + uppercase + special char";
+        }
+
+        // confirm password
+        if (errorMsg === "" && password !== confirmPassword) {
+            errorMsg = "Passwords do not match";
+        }
+
+        // gender
+        let gender = document.querySelector('input[name="gender"]:checked');
+        if (errorMsg === "" && !gender) {
+            errorMsg = "Please select gender";
+        }
+
+        // terms
+        let terms = document.getElementById("terms").checked;
+        if (errorMsg === "" && !terms) {
+            errorMsg = "You must agree to terms";
+        }
+
+        // result
+        if (errorMsg !== "") {
+            document.getElementById("formMessage").style.color = "red";
+            document.getElementById("formMessage").innerText = errorMsg;
+        } else {
+            document.getElementById("formMessage").style.color = "green";
+            document.getElementById("formMessage").innerText = "Account created successfully!";
+
+            localStorage.setItem("userEmail", email);
+            localStorage.setItem("userPassword", password);
+
+            alert("Account created successfully!");
+
+            window.location.href = "login.html";
+        }
+
+    });
+</script>
+</body>
+</html>

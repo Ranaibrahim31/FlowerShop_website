@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- favicon-->
+    <link rel="shortcut icon" href="https://i.postimg.cc/T1HtPsFn/favicon-96x96.png" type="image/x-icon">
+
+    <title>Flora</title>
+    <style>
+        *{
+                  margin:0;
+                  padding:0;
+                  box-sizing:border-box;
+                  font-family: Arial, sans-serif;
+              }
+
+              body{
+                  background:#fff5f8;
+                  color:#333;
+              }
+
+              nav{
+                  display:flex;
+                  justify-content:space-between;
+                  align-items:center;
+                  padding:20px 50px;
+                  background:#f8d7e3;
+              }
+
+              nav h1{
+                  color:#c94f7c;
+              }
+
+              nav ul{
+                  display:flex;
+                  list-style:none;
+                  gap:20px;
+              }
+
+              nav a{
+                  text-decoration:none;
+                  color:#333;
+                  font-weight:bold;
+              }
+
+              .hero{
+                  height:90vh;
+                  display:flex;
+                  justify-content:center;
+                  align-items:center;
+                  text-align:center;
+                  flex-direction:column;
+                  background: linear-gradient(to right, #ffe4ec, #f9a8d4, #db2777);
+                  url('https://images.unsplash.com/photo-1490750967868-88aa4486c946');
+                  background-size:cover;
+                  background-position:center;
+              }
+
+              .hero h2{
+                  font-size:50px;
+                  color:#c94f7c;
+              }
+
+              .hero p{
+                  margin:20px 0;
+                  font-size:18px;
+                  width:60%;
+              }
+
+              .buttons{
+                  display:flex;
+                  gap:15px;
+              }
+
+              button{
+                  padding:12px 25px;
+                  border:none;
+                  border-radius:25px;
+                  cursor:pointer;
+                  font-size:16px;
+              }
+
+              .signup{
+                  background:#c94f7c;
+                  color:white;
+              }
+
+              .login{
+                  background:white;
+                  color:#c94f7c;
+                  border:2px solid #c94f7c;
+              }
+
+              .browse{
+                  background:#f8d7e3;
+              }
+
+              .about{
+                  padding:80px 50px;
+                  text-align:center;
+              }
+
+              .about h3{
+                  color:#c94f7c;
+                  margin-bottom:20px;
+                  font-size:35px;
+              }
+    </style>
+
+</head>
+<body>
+
+<nav>
+    <h1>Flora🌷</h1>
+    <ul>
+        <li><a href="#">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="login.html">Login</a></li>
+        <li><a href="signup.html">Sign Up</a></li>
+    </ul>
+</nav>
+
+<section class="hero">
+    <h2>Fresh Flowers For Every Moment</h2>
+    <p>
+        Beautiful handcrafted bouquets made with love for every special occasion.
+    </p>
+
+    <div class="buttons">
+        <button class="signup" onclick="goToSignup()">Sign Up</button>
+        <button class="login" onclick="goToLogin()">Login</button>
+        <button class="browse" onclick="goToHome();">Browse</button>
+    </div>
+</section>
+
+<section class="about" id="about">
+    <h3>About Us</h3>
+    <p>
+        At Bloom Haven, we create elegant flower arrangements to brighten your moments
+        with beauty, freshness, and love.
+    </p>
+</section>
+
+<script>
+    function goToHome(){
+   window.location.href = "home.html";
+}
+    function goToLogin(){
+   window.location.href = "login.html";
+}
+
+function goToSignup(){
+   window.location.href = "signup.html";
+}
+
+
+</script>
+
+</body>
+</html>
